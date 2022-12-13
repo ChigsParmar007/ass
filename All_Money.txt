@@ -1,0 +1,1882 @@
+CPP Assignment :
+Question 1------------------
+#include<iostream.h>
+#include<stdio.h>
+#include<conio.h>
+class Date
+{
+	int day, month, year;
+
+	public:
+
+	Date()
+	{ day = month = year = 0; }
+
+	int get_d()
+	{ return day; }
+
+	int get_m()
+	{ return month; }
+
+	int get_y()
+	{ return year; }
+
+	void set_date(int day, int month, int year)
+	{
+		int tmp = 0;
+
+		if((day < 1) || (day > 30))
+		{ tmp = 1; }
+
+		else if (month < 1 || month > 12)
+		{ tmp = 1; }
+
+		else if (year < 1000 || year >= 10000)
+		{ tmp = 1; }
+
+		if (tmp == 0)
+		{
+			this->day = day;
+			this->month = month;
+			this->year = year;
+		}
+		else
+		{
+			cout << "\nDate format is not correct....";
+		}
+	}
+	Date operator + (int addval)
+	{
+		Date new_date;
+		new_date.day = day + addval;
+		if (new_date.day > 30)
+		{
+			new_date.day = new_date.day - 30;
+			new_date.month = month + 1;
+			new_date.year = year;
+			if (new_date.month > 12)
+			{
+				new_date.month = new_date.month - 12;
+				new_date.year = year + 1;
+			}
+		}
+		else
+		{
+			new_date.month = month;
+			new_date.year = year;
+		}
+		return new_date;
+	}
+	Date operator - (int addval)
+	{
+		Date new_date;
+		new_date.day = day - addval;
+		if (new_date.day <= 0)
+		{
+			if (new_date.day < 0)
+			{
+				new_date.day = new_date.day * -1;
+				new_date.day = 30 - new_date.day;
+				new_date.month = month - 1;
+			}
+			else
+			{
+				if (new_date.day == 0)
+				{
+					new_date.day = 30;
+					new_date.month = month - 1;
+					new_date.year = year - 1;
+				}
+			}
+			if (new_date.month <= 0)
+			{
+				new_date.month = 12;
+				new_date.year = year - 1;
+			}
+		}
+		else
+		{
+			new_date.month = month;
+			new_date.year = year;
+		}
+		return new_date;
+	}
+
+	Date operator = (Date d)
+	{
+		Date b, c;
+		day = b.day = c.day = d.day;
+		month = b.month = c.month = d.month;
+		year = b.year = c.year = d.year;
+		return b, c;
+	}
+
+	void operator < (Date com_date_2)
+	{
+		if (year == com_date_2.year)
+		{
+			if (month == com_date_2.month)
+			{
+				if (day == com_date_2.day)
+				{
+					 cout << "\nBoth date are equal";
+				}
+				else if (day > com_date_2.day)
+				{
+					cout << "\nSecond date is less ";
+				}
+				else if (day < com_date_2.day)
+				{
+					cout << "\nFirst date is less \n";
+				}
+			}
+			else if (month > com_date_2.month)
+			{
+				cout << "\nsecond date is less ";
+			}
+			else if (month < com_date_2.month)
+			{
+				cout << "\nFirst date is less \n";
+			}
+		}
+		else if (year > com_date_2.year)
+		{
+			cout << "\nSecond date is less ";
+		}
+		else if (year < com_date_2.year)
+		{
+			cout << "\nFirst date is less \n";
+		}
+	}
+	void operator <= (Date com_date_2)
+	{
+		if (year == com_date_2.year)
+		{
+			if (month == com_date_2.month)
+			{
+				if (day == com_date_2.day)
+				{
+					cout << "\nBoth date are equal";
+				}
+				else if (day > com_date_2.day)
+				{
+					cout << "\nSecond date is less than equals";
+				}
+				else if (day < com_date_2.day)
+				{
+					 cout << "\nFirst date is less than equals\n";
+				}
+			}
+			else if (month > com_date_2.month)
+			{
+				cout << "\nSecond date is less than equals";
+			}
+			else if (month < com_date_2.month)
+			{
+				cout << "\nFirst date is less than equals\n";
+			}
+		}
+		else if (year > com_date_2.year)
+		{
+			cout << "\nSecond date is less than equals";
+		}
+		else if (year < com_date_2.year)
+		{
+			cout << "\nFirst date is less than equals\n";
+		}
+	}
+	void operator > (Date com_date_2)
+	{
+		if (year == com_date_2.year)
+		{
+			if (month == com_date_2.month)
+			{
+				if (day == com_date_2.day)
+				{
+					cout << "\nBoth date are equal";
+				}
+				else if (day > com_date_2.day)
+				{
+					cout << "\nFirst date is greater ";
+				}
+				else if (day < com_date_2.day)
+				{
+					cout << "\nSecond date is greater \n";
+				}
+			}
+			else if (month > com_date_2.month)
+			{
+				cout << "\nFirst date is greater ";
+			}
+			else if (month < com_date_2.month)
+			{
+				cout << "\nSecond date is greater \n";
+			}
+		}
+		else if (year > com_date_2.year)
+		{
+			cout << "\nFirst date is greater ";
+		}
+		else if (year < com_date_2.year)
+		{
+			cout << "\nSecond date is greater \n";
+		}
+	}
+	void operator >= (Date com_date_2)
+	{
+
+		if (year == com_date_2.year)
+		{
+			if (month == com_date_2.month)
+			{
+				if (day == com_date_2.day)
+				{
+					cout << "\nBoth date are equal";
+				}
+				else if (day > com_date_2.day)
+				{
+					cout << "\nFirst date is greater than equals";
+				}
+				else if (day < com_date_2.day)
+				{
+					cout << "\nSecond date is greater than equals\n";
+				}
+			}
+			else if (month > com_date_2.month)
+			{
+				cout << "\nFirst date is greater than equals";
+			}
+			else if (month < com_date_2.month)
+			{
+				cout << "\nSecond date is greater than equals\n";
+			}
+		}
+		else if (year > com_date_2.year)
+		{
+			cout << "\nFirst date is greater than equals";
+		}
+		else if (year < com_date_2.year)
+		{
+			 cout << "\nSecond date is greater than equals\n";
+		}
+	}
+	void operator ++ (int a)
+	{
+		a = 1;
+		day = day + a;
+		if (day == 31)
+		{
+			day = 1;
+			if (month == 12)
+			{
+				month = 1;
+				year = year + 1;
+			}
+			else
+			{
+				month = month + a;
+			}
+		}
+		cout << "\nDate :\n " << day << "/" << month << "/" << year;
+	}
+
+	void operator -- (int a)
+	{
+		a = 1;
+		day = day - a;
+		if (day == 0)
+		{
+			day = 30;
+			if (month == 1)
+			{
+				month = 12;
+				year = year - 1;
+			}
+			else
+			{
+				month = month - a;
+			}
+		}
+		cout << "\nDate :\n " << day << "/" << month << "/" << year;
+	}
+};
+
+void main()
+{
+	Date date_1, new_date, a, b, c, d, com_date_1, com_date_2, obj_plus, obj_minus;
+	int dd, mm, yy, addday, ch;
+
+	clrscr();
+
+	cout << "Enter Day :\t ";
+	cin >> dd;
+	cout << "Enter Month :\t ";
+	cin >> mm;
+	cout << "Enter Year :\t ";
+	cin >> yy;
+
+	do{
+
+		cout<< "\n\n\t----CHOICE----\n";
+		cout << "\n1.Overload [+] operator";
+		cout << "\n2.Overload [-] operator";
+		cout << "\n3.Overload [=] operator";
+		cout << "\n4.Overload [<,<=,>,>=] operator";
+		cout << "\n5.Overload [++,--] operator";
+		cout << "\n6.Exit";
+		cout << "\n\nEnter your choice :\t ";
+		cin >> ch;
+
+		switch (ch)
+		{
+			case 1:
+
+			cout << "\nHow many days you want to add:\t ";
+			cin >> addday;
+			date_1.set_date(dd, mm, yy);
+			new_date = date_1 + addday;
+			cout << "\nDate :\n " 
+			     << new_date.get_d() << "/" 
+				 << new_date.get_m() << "/" 
+				 << new_date.get_y();
+			
+			break;
+
+			case 2:
+
+			cout << "\nHow many days you want to remove:\t ";
+			cin >> addday;
+			date_1.set_date(dd, mm, yy);
+			new_date = date_1 - addday;
+			cout << "\nDate:\n " << new_date.get_d() << "/" 
+			     << new_date.get_m() << "/" 
+				 << new_date.get_y();
+			
+			break;
+
+			case 3:
+
+			d.set_date(dd, mm, yy);
+			a = b = c = d;
+			cout << "\nA date = " << a.get_d() << "/" << a.get_m() << "/" << a.get_y();
+			cout << "\nB date = " << b.get_d() << "/" << b.get_m() << "/" << b.get_y();
+			cout << "\nC date = " << c.get_d() << "/" << c.get_m() << "/" << c.get_y();
+			cout << "\nD date = " << d.get_d() << "/" << d.get_m() << "/" << d.get_y();
+			
+			break;
+
+			case 4:
+
+			com_date_1.set_date(dd, mm, yy);
+			cout << "Enter Day to compare :\t ";
+			cin >> dd;
+			cout << "Enter Month to compare :\t ";
+			cin >> mm;
+			cout << "Enter Year to compare :\t ";
+			cin >> yy;
+			com_date_2.set_date(dd, mm, yy);
+			cout << "\n-> Result of [<] operator:\n";
+			com_date_1 < com_date_2;
+			cout << "\n-> Result of [<=] operator:\n";
+			com_date_1 <= com_date_2;
+			cout << "\n-> Result of [>] operator:\n";
+			com_date_1 > com_date_2;
+			cout << "\n-> Result of [>=] operator:\n";
+			com_date_1 >= com_date_2;
+			
+			break;
+
+			case 5:
+
+			obj_plus.set_date(dd, mm, yy);
+			obj_minus = obj_plus;
+			cout << "\n-> Result for [++] operator:\n";
+			obj_plus++;
+			cout << "\n-> Result for [--] operator:\n";
+			obj_minus--;
+			
+			break;
+
+			case 6: break;
+
+			default: cout<<"\nPLEASE ENTER VALID CHOICE...";
+		}
+	}while(ch!=6);
+    getch();
+}
+
+Question 3----------------------------------
+#include<iostream.h>
+#include<conio.h>
+class demo
+{
+	private:
+
+	int n1,n2;
+
+	public:
+
+	void set_value(int n1,int n2)
+	{
+		this->n1=n1; thi->n2=n2;
+	}
+};
+void main()
+{
+
+	clrscr();
+	getch();
+}
+
+question 4_1-----------------------
+#include<iostream.h>
+#include<conio.h>
+inline int max_val(int a,int b)
+{
+	return (a>b)?a:b;
+}
+void main()
+{
+	int a,b;
+	clrscr();
+	cout<<"\nEnter two value:\n";
+	cin>>a>>b;
+	cout<<"\nMaximum value:\t"<<max_val(a,b);
+	getch();
+}
+quetion 4_2----------------------
+  /* THIS CODE WILL INCREASES THE SIZE OF MEMORY
+     BECAUSE THERE ARE FOUR INLINE FUNCTIONS
+     AND THAT IS WHY DUPLICATION WILL GENERATE     */
+#include<iostream.h>
+#include<conio.h>
+inline int add(int a,int b)
+{
+	return (a+b);
+}
+inline int sub(int a,int b)
+{
+	return (a-b);
+}
+inline int mul(int a,int b)
+{
+	return (a*b);
+}
+inline int div(int a,int b)
+{
+	return (a/b);
+}
+void main()
+{
+	int a,b;
+	clrscr();
+	cout<<"\nEnter two number:\n";
+	cin>>a>>b;
+	cout<<"\nAddition:\t"<<add(a,b)
+	    <<"\nSubstraction:\t"<<sub(a,b)
+	    <<"\nMultiplication:\t"<<mul(a,b)
+	    <<"\nDivision:\t"<<div(a,b);
+	getch();
+}
+
+question 5---------------------------
+#include<iostream.h>
+#include<conio.h>
+class matrix
+{
+	int arr[3][3];
+	int i, j;
+
+	public:
+	matrix()
+	{
+		arr[0][0] = 1;
+		arr[0][1] = 2;
+		arr[0][2] = 3;
+		arr[1][0] = 4;
+		arr[1][1] = 5;
+		arr[1][2] = 6;
+		arr[2][0] = 7;
+		arr[2][1] = 8;
+		arr[2][2] = 9;
+	};
+	void operator++()
+	{
+		for (i = 0; i < 3; i++)
+		{
+			for (j = 0; j < 3; j++)
+			{
+				arr[i][j]=arr[i][j]+1;
+			}
+		}
+	}
+	void operator++(int n)
+	{
+		for (i = 0; i < 3; i++)
+		{
+			for (j = 0; j < 3; j++)
+			{
+				arr[i][j]=arr[i][j]+1;
+			}
+		}
+	}
+	void print()
+	{
+		for (i = 0; i < 3; i++)
+		{
+			for (j = 0; j < 3; j++)
+			{
+				cout << " " << arr[i][j];
+			}
+			cout << "\n";
+		}
+	}
+};
+void main()
+{
+	matrix m1,m2,m2_set;
+
+    clrscr();
+
+	cout<<"\n\t [++] prefix:\n\t--------------"
+	    <<"\n-> Before prefix increment\n";
+	m1.print();
+	++m1;
+	cout<<"\n-> After prefix increment\n";
+	m1.print();
+	cout<<"\n\t postfix [++]:\n\t--------------"
+	    "\n-> Before postfix increment\n";
+	m2.print();
+	m2++;
+	cout<<"\n-> After postfix increment\n";
+	m2.print();
+
+	getch();
+}
+
+question 6----------------------------------
+#include<iostream.h>
+#include<conio.h>
+class Student
+{
+    private:
+    int rno;
+    char nm[20];
+
+    public:
+
+    void set_info()
+    {
+	cout<<"\nEnter roll number:\t";
+	cin>>rno;
+	cout<<"\nEnter name:\t";
+	cin>>nm;
+    }
+    void get_info()
+    {
+	cout<<"\nRNO\tNAME\n";
+	cout<<rno<<"\t"<<nm;
+    }
+};
+void main()
+{
+    Student s1;
+
+    clrscr();
+
+    s1.set_info();
+    s1.get_info();
+
+    getch();
+}
+
+question 7------------------------------
+#include<iostream.h>
+#include<conio.h>
+class BaseClass
+{
+	public:
+	virtual void display()
+	{
+		cout<<"\nDisplay function [BASE CLASS]";
+	}
+};
+
+class DerivedClass:public BaseClass
+{
+	public:
+	void display()
+	{
+		cout<<"\nDisplay function [DERIVED CLASS]";
+	}
+};
+
+void main()
+{
+	BaseClass *p;
+	DerivedClass d1;
+
+	clrscr();
+
+	p=&d1;
+	p->BaseClass::display();
+	p->display();
+
+	getch();
+}
+
+question 9---------------------------------
+#include<iostream.h>
+#include<fstream.h>
+#include<stdio.h>
+#include<conio.h>
+#include<alloc.h>
+#include<iomanip.h>
+class Linked_list
+{
+	struct node
+	{
+		int data;
+		struct node *next;
+	};
+	struct node *head;
+	struct node *first;
+	struct node *new_node;
+
+	public:
+
+	Linked_list()
+	{
+		first=NULL;
+		head=NULL;
+	}
+
+	void display()
+	{
+		head=first;
+		cout<<"\nData in linked list:\n";
+		while(head!=NULL)
+		{
+			cout<<setiosflags(ios::left)
+			    <<setw(10)
+			    <<head->data
+			    <<"\n";
+			head=head->next;
+		}
+	}
+
+	void operator +(int n)
+	{
+		char ch;
+		do
+		{
+			new_node=(struct node *)malloc(sizeof(struct node));
+			cout<<"\nEnter node value:\t";
+			cin>>new_node->data;
+			new_node->next=NULL;
+			if(first==NULL)
+			{
+				first=new_node;
+			}
+			else
+			{
+				if(first->data>new_node->data)
+				{
+					new_node->next=first;
+					first=new_node;
+				}
+				else
+				{
+					head=first;
+					while(head->next!=NULL)
+					{
+						head=head->next;
+					}
+					new_node->next=new_node;
+					new_node=NULL;
+				}
+			}
+			cout<<"\nDo you want to continue['y' or 'Y' for YES]:\t";
+			cin>>ch;
+		}while(ch=='y' || ch=='Y');
+	}
+};
+
+void main()
+{
+	Linked_list l1;
+
+	clrscr();
+
+	int n;
+	l1+1;
+
+	fstream f1;
+	f1.open("P9_FILE.txt",ios::out);
+	f1.write((char *)& l1,sizeof(l1));
+	f1.close();
+
+	ifstream f2;
+	f2.open("P9_FILE.txt",ios::in);
+	f2.read((char *)& l1,sizeof(l1));
+	l1.display();
+	f2.close();
+
+	getch();
+}
+
+question 10----------------------------
+#include<iostream.h>
+#include<conio.h>
+class Item
+{
+    static int price;
+
+    public:
+
+    static void setPrice(int a)
+    {
+	price=a;
+    }
+    static void print()
+    {
+	cout<<"\nPrice is: "<<price;
+    }
+};
+int Item::price;
+void main()
+{
+    clrscr();
+
+    Item::setPrice(1000);
+    Item::print();
+
+    getch();
+}
+
+question 11-----------------------------
+#include<iostream.h>
+#include<conio.h>
+class demo
+{
+	public:
+
+	static int cnt;
+	demo() { cnt++; }
+	static int cnt_obj()
+	{
+		return cnt;
+	}
+};
+int demo::cnt;
+void main()
+{
+	demo d1,d2,d3,d4,d5;
+
+	clrscr();
+
+	cout<<"\nTotal objects:\t"<<demo::cnt_obj();
+
+	getch();
+}
+
+question 12---------------------------------
+#include<iostream.h>
+#include<conio.h>
+const m=50;
+class items
+{
+	int itemCode[m];
+	float itemPrice[m];
+	int cnt;
+
+	public:
+
+	void count(void){cnt=0;}
+	void getitem();
+	void displaySum();
+	void remove();
+	void displayItems();
+};
+void items:: getitem()
+{
+	cout<<"Enter item code : ";
+	cin>>itemCode[cnt];
+	cout<<"Enter Item cost : ";
+	cin>>itemPrice[cnt];
+	cnt++;
+}
+void items:: displaySum()
+{
+	float sum=0;
+	for(int i=0;i<cnt;i++)
+	sum=sum+itemPrice[i];
+	cout<<"\n Total Item Cost Value:"<<sum<<"\n";
+}
+void items:: remove()
+{
+	int a;
+	cout<<"\nEnter Item Code which you want to delete : ";
+	cin>>a;
+	for(int i=0;i<cnt;i++)
+	{
+		if(itemCode[i] == a)
+		{
+			itemCode[i]=0;
+			itemPrice[i]=0;
+		}
+	}
+}
+void items :: displayItems()
+{
+	cout<<"\nITEM CODE\tITEM COST\n";
+	for(int i=0;i<cnt;i++)
+	{
+		cout<<"\n"<<itemCode[i]<<"\t\t"<<itemPrice[i];
+	}
+	cout<<"\n";
+}
+void main()
+{
+	clrscr();
+	items i;
+	i.count();
+	int x;
+	do
+	{
+		cout<<"\n     -------CHOICES-------";
+		cout<<"\n1.Add an Item";
+		cout<<"\n2.Display Total Cost Value";
+		cout<<"\n3.Delete an Item";
+		cout<<"\n4.Display all items";
+		cout<<"\n5.Quit";
+
+		cout<<"\n\nEnter Your Choice : ";
+		cin>>x;
+
+		switch(x)
+		{
+			case 1:
+			i.getitem();
+			break;
+
+			case 2:
+			i.displaySum();
+			break;
+
+			case 3:
+			i.remove();
+			break;
+
+			case 4:
+			i.displayItems();
+			break;
+
+			case 5:
+			break;
+
+			default:
+			cout<<"Enter appropriate choice...";
+		}
+	}while(x!=5);
+	getch();
+}
+
+question 13-----------------------------------------------
+#include<iostream.h>
+#include<conio.h>
+class Manager_list
+{
+      private:
+
+      int id,age;
+      char nm[20];
+      double sal;
+
+      public:
+
+      Manager_list()
+      {
+	 id=age=sal=0;
+      }
+      void set_info();
+      void get_info();
+};
+void Manager_list::set_info()
+{
+	cout<<"\nEnter id:\t";
+	cin>>id;
+
+	cout<<"\Enter name:\t";
+	cin>>nm;
+
+	cout<<"\Enter age:\t";
+	cin>>age;
+
+	cout<<"\Enter sal:\t";
+	cin>>sal;
+	cout<<"\n-------------------------\n";
+}
+void Manager_list::get_info()
+{
+	cout<<endl<<id<<"\t"<<nm<<"\t"<<age<<"\t"<<sal;
+}
+void main()
+{
+	//int size,ch;
+	clrscr();
+       /*
+	cout<<"\nHow many managers you want to add:\t";
+	cin>>size;   */
+
+	Manager_list o1[2];
+
+	for(int i=0;i<2;i++)
+	{
+		o1[i].set_info();
+	}
+	cout<<"\n\nID\tNAME\tAGE\tSALARY";
+	for(i=0;i<2;i++)
+	{
+		o1[i].get_info();
+	}
+	getch();
+}
+
+question 14--------------------------------------
+#include<iostream.h>
+#include<conio.h>
+class find_square
+{
+	private:
+	int no;
+
+	public:
+	find_square(int x) { no=x; }
+
+	friend void cnt_square(find_square f1);
+};
+void cnt_square(find_square f1)
+{
+	//ans=f1.no*f1.no;
+	cout<<"\nSquare is:\t"<<(f1.no*f1.no);
+}
+void main()
+{
+	find_square obj1(2),obj2(3);
+	clrscr();
+	cnt_square(obj1);
+	cnt_square(obj2);
+	getch();
+}
+
+question 15----------------------------------------
+#include<iostream.h>
+#include<conio.h>
+class complex
+{
+	int real,img;
+
+	public:
+
+	complex() { real=img=0; }
+
+	void getdata()
+	{
+		cout<<"\nEnter real value:\t";
+		cin>>real;
+
+		cout<<"Enter img value:\t";
+		cin>>img;
+	}
+
+	void operator + (complex);
+	void operator - (complex);
+};
+
+void complex::operator + (complex c2)
+{
+	complex c;
+	c.real=real+c2.real;
+	c.img=img+c2.img;
+	cout<<"\n\nADDITION:\t [r"<<c.real<<", i"<<c.img<<"]";
+}
+
+void complex ::operator-(complex c2)
+{
+	complex c;
+	c.real=real-c2.img;
+	c.img=img-c2.img;
+	cout<<"\n\nSUBTRACTION:\t [r"<<c.real<<", i"<<c.img<<"]";
+}
+
+void main()
+{
+	complex c1, c2;
+	int ch;
+	clrscr();
+
+	do
+	{
+		cout<<"\n\n----CHOICES----"
+		    <<"\n1. Input data"
+		    <<"\n2. Overload [+] operator"
+		    <<"\n3. Overload [-] operator"
+		    <<"\n4. Quit"
+		    <<"\nEnter your choice:\t";
+		cin>>ch;
+
+		switch(ch)
+		{
+			case 1:
+			cout<<"\n-> Number 1:";
+			c1.getdata();
+			cout<<endl<<"\n-> Number 2:";
+			c2.getdata();
+			break;
+
+			case 2:
+			c1+c2;
+			break;
+
+			case 3:
+			c1-c2;
+			break;
+
+			case 4:
+			break;
+
+			default: cout<<"\nENTER VALID CHOICE....";
+		}
+	}while(ch!=4);
+
+	getch();
+}
+
+question 16 ------------------------------
+#include<iostream.h>
+#include<conio.h>
+class demo
+{
+	private:
+	int n1,n2;
+
+	public:
+
+	demo(int a,int b)
+	{
+		n1=a; n2=b;
+	}
+	demo(demo &d1)
+	{
+		n1=d1.n1;
+		n2=d1.n2;
+	}
+	int addition()
+	{
+		return (n1+n2);
+	}
+};
+void main()
+{
+	demo o1(10,20),o2(o1);
+	clrscr();
+
+	cout<<"\nAddition before copying:\t"
+	    <<o1.addition();
+
+	cout<<"\nAddition after copying object1 to object2:\t"
+	    <<o2.addition();
+
+	getch();
+}
+
+question 17--------------------------------------------
+#include<iostream.h>
+#include<conio.h>
+class Student
+{
+	 int* id;
+
+	 public:
+	 Student()
+	 {
+		id=new int;
+		*id=101;
+	 }
+	 Student(int x)
+	 {
+		id=new int;
+		*id=x;
+	 }
+	 void display()
+	 {
+		cout<<"\nId:\t"<<*id;
+	 }
+};
+
+void main()
+{
+	clrscr();
+
+	//CALLING DEFAULT CONSTRUCTOR
+	Student s1=Student();
+	s1.display();
+
+	//CALLING PARAMETERIZED CONSTROCTOR
+	Student s2=Student(102);
+	s2.display();
+
+	getch();
+}
+
+question 18----------------------------
+#include<iostream.h>
+#include<conio.h>
+class Matrix
+{
+	int a;
+	int b;
+	int A[3][3];
+
+	public:
+	void insert_matrix();
+	void retrive_matrix();
+};
+
+void Matrix::insert_matrix()
+{
+	for(int i=1;i<=3;i++)
+	{
+		for(int j=1;j<=3;j++)
+		{
+			cout<<"A["<<i<<"]["<<j<<"] : ";
+			cin>>A[i][j];
+		}
+	}
+}
+
+void Matrix::retrive_matrix()
+{
+	for(int i=1;i<=3;i++)
+	{
+		for(int j=1;j<=3;j++)
+		{
+			cout<<" "<<A[i][j];
+		}
+		cout<<endl;
+	}
+}
+
+void main()
+{
+	Matrix m;
+
+	clrscr();
+
+	cout<<"\n-> Enter matrix elements:\n";
+	m.insert_matrix();
+	cout<<"\n-> Retriving matrix elements:\n";
+	m.retrive_matrix();
+	getch();
+}
+
+question 20------------------------------------
+#include<iostream.h>
+#include<malloc.h>
+#include<conio.h>
+class Book
+{
+	int id;
+	char *nm;
+
+	public:
+
+	Book(int id,char *nm)
+	{
+		this->nm=nm;
+		this->id=id;
+	}
+	void display()
+	{
+		cout<<"\nId:\t"<<id;
+		cout<<"\nName:\t"<<nm;
+	}
+	void * operator new(size_t size)
+	{
+		cout<<"\n\n-> Overloading NEW operator[Size:"<<size<<"]\n";
+		void *p=malloc(size);
+		return p;
+	}
+	void operator delete(void * p)
+	{
+		cout<<"\n\n-> Overloading DELETE operator";
+		free(p);
+	}
+};
+
+void main()
+{
+	int id;
+	char nm[20];
+
+	clrscr();
+
+	cout<<"\nEnter book id:\t";
+	cin>>id;
+	cout<<"\nEnter book name:\t";
+	cin>>nm;
+	Book *b=new Book(id,nm);
+	b->display();
+	delete b;
+
+	getch();
+}
+
+question 21_1 ---------------------------------
+#include<iostream.h>
+#include<conio.h>
+class A
+{
+  public:
+  A()
+  {
+     cout<<"Constructor of the base class...";
+  }
+};
+class B
+{
+  public:
+  B()
+  {
+     cout<<"\nConstructor of the middle base class...\n";
+
+  }
+};
+class C: public A, public B
+{
+  public:
+  C(): A(), B()
+  {
+    cout<<"Constructor of the derived class...\n";
+  }
+};
+void main()
+{
+  clrscr();
+  C obj;
+  getch();
+}
+
+question 21_2------------------------------
+#include <iostream.h>
+#include<conio.h>
+class Parent
+{
+    public:
+    Parent()
+    {
+	 cout<<"\nInside base class...";
+    }
+};
+class Child : public Parent
+{
+    public:
+    Child()
+    {
+	cout <<"\nInside sub class...";
+    }
+};
+void main()
+{
+    clrscr();
+    Child obj;
+    getch();
+}
+
+question 21_3--------------------------
+#include<iostream.h>
+#include<conio.h>
+class A
+{
+  public:
+  A()
+  {
+     cout<<"Constructor of the base class...";
+  }
+};
+class B:public A
+{
+  public:
+  B():A()
+  {
+     cout<<"\nConstructor of the middle base class...\n";
+  }
+};
+class C:public B
+{
+  public:
+  C():B()
+  {
+    cout<<"Constructor of the derived class...\n";
+  }
+};
+void main()
+{
+  clrscr();
+  C obj;
+  getch();
+}
+
+question 21_4---------------------------------------
+#include<iostream.h>
+#include<conio.h>
+class A
+{
+  public:
+  A()
+  {
+     cout<<"Constructor of the base class...";
+  }
+};
+class B:public A
+{
+  public:
+  B():A()
+  {
+     cout<<"\nConstructor of the derived class...\n";
+
+  }
+};
+class C: public A
+{
+  public:
+  C(): A()
+  {
+    cout<<"\nConstructor of the derived class...\n";
+  }
+};
+void main()
+{
+  clrscr();
+  cout<<"\n-> USE FIRST DERIVED CLASS\n";
+  B b1;
+  cout<<"\n-> USE SECOND DERIVED CLASS\n";
+  C c1;
+  getch();
+}
+
+question 21_5--------------------------------------
+#include<iostream.h>
+#include<conio.h>
+class A
+{
+  public:
+  A()
+  {
+     cout<<"\nConstructor of the A class...";
+  }
+};
+class B:public A
+{
+  public:
+  B(): A()
+  {
+     cout<<"\nConstructor of the B class...";
+
+  }
+};
+class C
+{
+  public:
+  C()
+  {
+    cout<<"\nConstructor of the C class...";
+  }
+};
+class D:public B, public C
+{
+  public:
+  D(): B(), C()
+  {
+    cout<<"\nConstructor of the D class...";
+  }
+};
+void main()
+{
+  clrscr();
+  D obj;
+  getch();
+}
+
+question 22----------------------------------------
+#include<iostream.h> 
+#include<conio.h> 
+class student 
+{ 
+    protected: 
+    int rno; 
+    
+    public: 
+    void get_number(int a) 
+    { 
+        rno = a; 
+    } 
+    void put_number(void) 
+    { 
+        cout<<"\nRoll No:\t"<<rno<<"\n"; 
+    } 
+}; 
+class test : public student 
+{ 
+    protected: 
+    float t1, t2; 
+    
+    public: 
+    void get_marks(float x, float y) 
+    { 
+        t1 = x; 
+        t2 = y; 
+    } 
+    void put_marks(void) 
+    { 
+	cout<<"\nMarks obtained:"
+	<<"\nTest 1:\t"<<t1
+	<<"\tTest 2:\t"<<t2<<"\n";
+    }
+};
+class sports
+{
+    protected:
+    float score;
+
+    public:
+    void get_score(float s)
+    {
+	score = s;
+    }
+    void put_score(void)
+    {
+	cout<<"\nSports score:\t"<<score<<"\n";
+    }
+};
+class result : public test, public sports
+{
+    float total;
+
+    public:
+    void display();
+};
+void result ::display()
+{
+    total = t1 + t2 + score;
+    put_number();
+    put_marks();
+    put_score();
+    cout<<"\nTotal marks:\t"<<total<<"\n";
+}
+void main()
+{
+    result student_1;
+    int rno;
+    float t1, t2, score;
+
+    clrscr();
+
+    cout<<"\nEnter roll no:\t";
+    cin>>rno;
+    cout<<"\nEnter test-1 mark[float]:\t";
+    cin>>t1;
+    cout<<"\nEnter test-2 mark[float]:\t";
+    cin>>t2;
+    cout<<"\nEnter sports score[float]:\t";
+    cin>>score;
+
+    cout<<"\n\tSTUDENT RESULT\n";
+    cout<<"-----------------------------------";
+    student_1.get_number (rno);
+    student_1.get_marks (t1,t2);
+    student_1.get_score (score);
+    student_1.display ();
+
+    getch();
+}
+
+question 23-----------------------------------------------------
+#include<iostream.h>
+#include<string.h>
+#include<conio.h>
+class person
+{
+    char name[20];
+    float age;
+
+    public:
+    person(char *s, float a)
+    {
+	strcpy(name, s);
+	age = a;
+    }
+    person & person :: greater(person & x)
+    {
+	if(x.age >= age)
+	    return x;
+	else
+	    return *this;
+    }
+    void display(void)
+    {
+	cout<<"\nNAME\tAGE\n";
+	cout<<name<<"\t"<<age;
+    }
+};
+void main()
+{
+    char n1[20],n2[20];
+    int a1,a2;
+
+    clrscr();
+
+    cout<<"\n-> Enter person-1 data:\n";
+    cout<<"Enter name:\t";
+    cin>>n1;
+    cout<<"\nEnter age:\t";
+    cin>>a1;
+
+    cout<<"\n-> Enter person-2 data:\n";
+    cout<<"Enter name:\t";
+    cin>>n2;
+    cout<<"\nEnter age:\t";
+    cin>>a2;
+
+    person p1(n1,a1), p2(n2,a1);
+
+    person p = p1.greater (p2);
+    cout<<"\nElder Person is:\n";
+    p.display();
+
+    getch();
+}
+
+question 24----------------------------------------------
+#include<iostream.h>
+#include<conio.h>
+class class_1
+{
+      public:
+
+      virtual void print_msg()
+      {
+		cout<<"\nIN BASE CLASS...";
+      }
+};
+class class_2:public class_1
+{
+	public:
+
+	void print_msg()
+	{
+		cout<<"\nIN DERIVED CLASS...";
+	}
+};
+void main()
+{
+	class_1 co1_1,*p1;
+	class_2 co2_1;
+
+	clrscr();
+
+	//CALLING BASE CLASS PRINT_MSG()
+	p1=&co1_1;
+	p1->print_msg();
+
+	//CALLING DERIVED CLASS PRINT_MSG()
+	//BECAUSE PRINT_MSG() IS 'VIRTUAL' METHOD
+	//OTHERWISE IT WILL CALLS THE BASE CLASS PRINT_MSG()
+	p1=&co2_1;
+	p1->print_msg();
+
+	getch();
+}
+
+question 26-----------------------------------
+#include<stdio.h>
+#include<conio.h>
+#include<iomanip.h>
+#include<string.h>
+ostream &put_nm(ostream &o1)
+{
+	o1.width(10);
+	o1.setf(ios::left, ios::adjustfield);
+	o1.fill('-');
+	return o1;
+}
+istream &get_nm(istream &i1)
+{
+	cout<<"Enter any value:\t";
+	return i1;
+}
+void main()
+{
+	char nm[30];
+
+	clrscr();
+
+	cin>>get_nm>>nm;
+	cout<<put_nm<<nm;
+
+	getch();
+}
+question 27---------------------------------------------
+#include<iostream.h>
+#include<fstream.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<stdio.h>
+void main()
+{
+	clrscr();
+	ifstream input_file;
+	ofstream output_file;
+	char str;
+	char source_file[50], destination_file[50];
+
+	cout << "Enter Source File Name With Extention : ";
+	gets(source_file);
+	input_file.open(source_file);
+
+	if(!input_file)
+	{
+		cout << "Error in Opening Source File!!!";
+		exit(1);
+	}
+
+	cout << "Enter Destination File Name With Extension : ";
+	gets(destination_file);
+	output_file.open(destination_file);
+
+	if(!output_file)
+	{
+		cout << "Error in Opening Destination File!!!";
+		output_file.close();
+		exit(2);
+	}
+	while(input_file.eof()==0)
+	{
+		str=input_file.get();
+		if(!input_file.eof())
+			output_file<<str;
+	}
+	cout << "\n\n Source File Date Successfully Copied to Destination File!!!";
+
+	input_file.close();
+	output_file.close();
+
+	getch();
+}
+
+question 28----------------------------------------------
+#include <fstream.h> 
+#include<iostream.h>
+#include<conio.h>
+void main( ) 
+{ 
+    struct employee 
+    { 
+        char name[ 20 ]; 
+        int age; 
+    } ; employee e; 
+
+    clrscr();
+
+    char ch = 'Y'; 
+    ofstream outfile; 
+    outfile.open( "28_FILE.DAT", ios::out | ios::binary ); 
+    while( ch == 'Y' ) 
+    { 
+        cout << endl << "Enter a name:\t"; 
+        cin >> e.name;
+        cout << endl << "Enter a age:\t";
+        cin>> e.age; 
+
+        outfile.write( ( char * )&e, sizeof( e ) ); 
+
+        cout << endl << "Wants to add another[Y/N]:\t"; 
+        cin >> ch; 
+    } 
+    outfile.close( ); 
+
+    ifstream infile; 
+    infile.open( "28_FILE.DAT", ios::in | ios::binary ); 
+
+    while( infile.read( ( char * )&e, sizeof( e ) ) ) 
+    { 
+        cout << endl << e.name << "\t" 
+             << e.age;
+    } 
+
+    getch();
+}
+
+question 30---------------------------------------------
+#include <iostream.h>
+#include <conio.h>
+#include <stdlib.h>
+#define size 10
+template <class T>
+class stack
+{
+    T s[size];
+    int top;
+
+    public:
+      stack()
+      {
+          top = -1;
+      }
+
+      void push()
+      {
+          T item;
+          cout << "\nEnter an element:\t ";
+          cin >> item;
+          if (top >= size - 1)
+          {
+              cout << "\nStack Overflow...";
+              return;
+          }
+          top = top + 1;
+          s[top] = item;
+          cout << "Element Inserted successfully...";
+      }
+
+      void pop()
+      {
+          T item;
+          if (top == -1)
+          {
+              cout << "\nStack Underflow...";
+              return;
+          }
+          item = s[top];
+          top--;
+	  cout << item << " deleted successfully...";
+      }
+
+      void peep()
+      {
+          if (top == -1)
+          {
+              cout << "\nStack Underflow...";
+              return;
+          }
+          else
+          {
+              cout << "\nPeeped element:\t" << s[top];
+          }
+      }
+
+      void update()
+      {
+          if (top == -1)
+          {
+              cout << "\nStack Underflow...";
+              return;
+          }
+          else
+          {
+              int i;
+              T new_item;
+              cout << "\nEnter index you want to update:\t ";
+              cin >> i;
+              if ((i <= 0) || ((top - i + 1) < 0))
+              {
+                  cout << "\nInvalid  index number...";
+                  return;
+              }
+              cout << "\nEnter New element:\t ";
+              cin >> new_item;
+              s[top - i + 1] = new_item;
+              cout << "\nElement Updated successfully...";
+          }
+      }
+      void display()
+      {
+          if (top == -1)
+          {
+              cout << "\nStack Underflow...";
+              return;
+          }
+          else
+          {
+              int i;
+              cout << "\n\t->Elements of stack: \n";
+              for (i = top; i >= 0; i--)
+              {
+                  cout << " " << s[i];
+              }
+          }
+      }
+};
+
+void main()
+{
+    int ch;
+    stack<int> s;
+
+    clrscr();
+
+    do
+    {
+        cout << "\n\n\t---CHOICES---";
+        cout << "\n1.Push";
+        cout << "\n2.Pop";
+        cout << "\n3.Peep";
+        cout << "\n4.Update";
+        cout << "\n5.Display";
+        cout << "\n6.Exit";
+        cout << "\nEnter Your Choice:\t";
+        cin >> ch;
+        switch (ch)
+        {
+          case 1:
+            s.push();
+            break;
+
+          case 2:
+            s.pop();
+            break;
+
+          case 3:
+            s.peep();
+            break;
+
+          case 4:
+            s.update();
+            break;
+
+          case 5:
+            s.display();
+            break;
+
+          case 6: break;
+
+          default: cout << "PLEASE ENTER VALID CHOICE...";
+        }
+    } while(ch!=6);
+    getch();
+}
+question 31---------------------------------------------------
+#include<iostream.h>
+#include<conio.h>
+template<typename T>
+T add(T x,T y)
+{
+	return (x+y);
+}
+void main()
+{
+	clrscr();
+	cout<<"\nInteger:\t"<<add<int>(3,7)<<endl;
+	getch();
+}
