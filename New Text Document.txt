@@ -1,0 +1,368 @@
+---------- p2.cpp ----------
+
+#include <iostream>
+using namespace std;
+
+class node
+{
+public:
+    int val;
+    node *next;
+
+    node()
+    {
+        val = 0;
+        next = NULL;
+    }
+};
+
+class linklist
+{
+public:
+    node *head;
+    linklist()
+    {
+        head = NULL;
+    }
+
+    void operator+(int n)
+    {
+        node *newnode = new node();
+        cout << " enter a val : " << endl;
+        cin >> newnode->val;
+        if (head == NULL)
+        {
+            head = newnode;
+        }
+        else
+        {
+            if (head->val > newnode->val)
+            {
+                newnode->next = head;
+                head = newnode;
+            }
+            else
+            {
+                node *temp = head;
+                while (temp->next != NULL && temp->next->val < newnode->val)
+                {
+                    temp = temp->next;
+                }
+                newnode->next = temp->next;
+                temp->next = newnode;
+            }
+        }
+    }
+
+    void display()
+    {
+        node *temp = head;
+
+        while (temp != NULL)
+        {
+            cout << temp->val << " -> ";
+            temp = temp->next;
+        }
+    }
+};
+
+int main()
+{
+
+    linklist x;
+
+    x+1;
+    x+1;
+    x+1;
+    x+1;
+    
+
+    x.display();
+
+    return 0;
+}
+
+---------- p4a.cpp ----------
+
+#include <iostream>
+using namespace std;
+inline int cube(int s)
+{
+    return s * s * s;
+}
+int main()
+{
+    cout << "The cube of 3 is: " << cube(3) << "\n";
+    return 0;
+}
+
+
+
+---------- p4b.cpp ----------
+
+#include <iostream>
+using namespace std;
+inline int cube(int s)
+{
+    return s * s * s;
+}
+int main()
+{
+    for (int i = 1; i < 6; i++)
+    {
+        cout << "The cube of " << i << " is: " << cube(i) << "\n";
+    }
+
+    return 0;
+}
+
+---------- p6.cpp ----------
+
+#include <iostream>
+using namespace std;
+
+class Person
+{
+    int id;
+    char name[100];
+
+public:
+    void set_p()
+    {
+        cout << "Enter the Id:";
+        cin >> id;
+        fflush(stdin);
+        cout << "Enter the Name:";
+        cin.get(name, 100);
+    }
+
+    void display_p()
+    {
+        cout << endl
+             << id << "\t" << name << "\t";
+    }
+};
+
+class Student : private Person
+{
+    char course[50];
+    int fee;
+
+    Person p;
+
+public:
+    void set_s1()
+    {
+        set_p();
+        cout << "Enter the Course Name:";
+        fflush(stdin);
+        cin.getline(course, 50);
+        cout << "Enter the Course Fee:";
+        cin >> fee;
+    }
+
+    void display_s1()
+    {
+        display_p();
+        cout << course << "\t" << fee << endl;
+    }
+
+    void set_s2()
+    {
+        p.set_p();
+        cout << "Enter the Course Name:";
+        fflush(stdin);
+        cin.getline(course, 50);
+        cout << "Enter the Course Fee:";
+        cin >> fee;
+    }
+
+    void display_s2()
+    {
+        p.display_p();
+        cout << course << "\t" << fee << endl;
+    }
+};
+
+main()
+{
+    Student s;
+
+    // inheritance
+    s.set_s1();
+    s.display_s1();
+
+    // contenership
+    s.set_s2();
+    s.display_s2();
+
+    return 0;
+}
+
+
+---------- p8.cpp ----------
+
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+template<class T>
+
+T abst(T a)
+{
+    return abs(a);
+}
+
+int main()
+{
+    cout << abst(-3) << endl;
+    cout << abst(34.38) << endl;
+
+    return 0;
+}
+
+---------- p11.cpp ----------
+
+#include <iostream>
+using namespace std;
+
+class demo1
+{
+
+private:
+    int val;
+
+public:
+    static int objectCount;
+
+    demo1()
+    {
+        objectCount++;
+    }
+
+    void getdata()
+    {
+        cout << "Enter value : " << endl;
+        cin >> val;
+    }
+
+    void putdata()
+    {
+        cout << "value = " << val << endl;
+        cout << endl;
+    }
+    
+    static int showcount()
+    {
+        return objectCount; 
+    }
+};
+
+int demo1::objectCount = 0; 
+
+int main(void)
+{
+    demo1 s1;
+
+    s1.getdata();
+    s1.putdata();
+
+    demo1 s2;
+
+    s2.getdata();
+    s2.putdata();
+
+    demo1 s3;
+
+    s3.getdata();
+    s3.putdata();
+
+    cout << "Total objects created = " << demo1 :: showcount() << endl;
+
+    return 0;
+}
+
+---------- p25.cpp ----------
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+    cout << "Example for formatted IO" << endl;
+
+    cout.precision(5);
+    cout << "precision(5) ---> " << 123.4567890 << endl;
+    cout << "precision(5) ---> " << 9.876543210 << endl;
+
+    cout << "setf(showpos): " << endl;
+    cout.setf(ios::showpos);
+    cout << 123 << endl;
+
+    cout << "unsetf(showpos): " << endl;
+    cout.unsetf(ios::showpos);
+    cout << 123 << endl;
+
+    return 0;
+}
+
+---------- p29.cpp ----------
+
+#include <iostream>
+#include <fstream>
+#include <stdlib.h>
+using namespace std;
+
+int main(int argc, char *argv[])
+{
+    int number[9] = {11, 22, 33, 44, 55, 66, 77, 88, 99};
+    if (argc != 3)
+    {
+        cout << "argc=" << argc << "\n";
+        cout << "Error in arguments\n";
+        exit(1);
+    }
+    ofstream fout1, fout2;
+    fout1.open(argv[1]);
+    if (fout1.fail())
+    {
+        cout << "Could not open the file:"
+             << argv[1] << "\n";
+        exit(1);
+    }
+    fout2.open(argv[2]);
+    if (fout2.fail())
+    {
+        cout << "Could not open the file:"
+             << argv[2] << "\n";
+        exit(1);
+    }
+    for (int i = 0; i < 9; i++)
+    {
+        if (number[i] % 2 == 0)
+            fout2 << number[i] << " ";
+        else
+            fout1 << number[i] << " ";
+    }
+    fout1.close();
+    fout2.close();
+    ifstream fin;
+    char ch;
+    for (int i = 1; i < argc; i++)
+    {
+        fin.open(argv[i]);
+        cout << "Contents of " << argv[i] << "\n";
+        do
+        {
+/*Manual for C++ Programming Page 52 of
+89*/
+ fin.get(ch);
+ cout << ch;
+        } while (fin);
+        cout << "\n\n";
+        fin.close();
+    }
+    return 0;
+}
+//Note : -project->settings->debug->program arguments(specify the arguments to be passed)
