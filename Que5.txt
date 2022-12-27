@@ -1,0 +1,317 @@
+package java_ds;
+import java.util.Scanner;
+
+public class Que5 
+{
+    Scanner input = new Scanner(System.in);
+    String[] arr = new String[100];
+    
+    public void insertion_sort()
+    {
+        System.out.println("Enter Size of array : ");
+        int n = input.nextInt();
+        
+        System.out.println("Enter Elements : ");
+        for (int i = 0; i < n; i++)
+        {
+            arr[i] = input.next();
+        }
+        
+        insertion_sort(arr, n);
+    }
+    
+    private void insertion_sort(String[] arr, int n)
+    {
+        for(int i = 0; i < n-1; i++)
+        {
+            for (int j = i+1; j<n; j++)
+            {
+                if(arr[i].compareTo(arr[j])>0)
+                {
+                    String temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+        
+        System.out.println("\nAfter applying Insertion Sort Array elements.....");
+        for(int i = 0; i < n; i++)
+        {
+            System.out.println(arr[i]);
+        }
+    }
+    
+    public void selection_sort()
+    {
+        System.out.println("Enter Size of array : ");
+        int n = input.nextInt();
+        
+        System.out.println("Enter Elements : ");
+        for (int i = 0; i < n; i++)
+        {
+            arr[i] = input.next();
+        }
+        
+        selection_sort(arr, n);
+    }
+    
+    private void selection_sort(String[] arr, int n)
+    {
+        for(int i = 0; i < n - 1; i++)
+        {
+            int left = i;
+            String minStr = arr[i];
+            for(int j = i + 1; j < n; j++)  //To sort in Descending order, change > to <.
+            {
+                if(arr[j].compareTo(minStr) < 0)
+                {
+                    minStr = arr[j];
+                    left = j;
+                }
+            }
+            if(left != i)
+            {
+                String temp = arr[left];
+                arr[left] = arr[i];
+                arr[i] = temp;
+            }
+        }
+        
+        System.out.println("\nAfter applying Selection Sort Array elements.....");
+        for(int i = 0; i < n; i++)
+        {
+            System.out.println(arr[i]);
+        }
+    }
+    
+    public void bubble_sort()
+    {
+        System.out.println("Enter Size of array : ");
+        int n = input.nextInt();
+        
+        System.out.println("Enter Elements : ");
+        for (int i = 0; i < n; i++)
+        {
+            arr[i] = input.next();
+        }
+        
+        bubble_sort(arr,n);
+    }
+    
+    private void bubble_sort(String[] arr, int n)
+    {
+        for (int j = 0; j < n - 1; j++)
+        {
+           for (int i = j + 1; i < n; i++)
+            {
+                if (arr[j].compareTo(arr[i]) > 0)
+                {
+                    String temp = arr[j];
+                    arr[j] = arr[i];
+                    arr[i] = temp;
+                }
+            }
+        }
+        
+        System.out.println("\nAfter applying Bubble Sort Array elements.....");
+        for(int i = 0; i < n; i++)
+        {
+            System.out.println(arr[i]);
+        }
+    }
+
+    public void quick_sort()
+    {
+        System.out.println("Enter Size of array : ");
+        int n = input.nextInt();
+        
+        System.out.println("Enter Elements : ");
+        for (int i = 0; i < n; i++)
+        {
+            arr[i] = input.next();
+        }
+        
+        String[] back = quick_sort(arr, 0, n-1);
+        
+        System.out.println("\nAfter applying Quick Sort Array elements.....");
+        for(int i = 0; i < n; i++)
+        {
+            System.out.println(back[i]);
+        }
+    }
+    private String[] quick_sort(String[] arr, int left, int right)
+    {
+        int l = left;
+        int r = right;
+        String pivot = arr[left + (right - left) / 2];
+        
+        while (l <= r) 
+        {
+            while (arr[l].compareToIgnoreCase(pivot) < 0) 
+            {
+                l++;
+            }
+            while (arr[r].compareToIgnoreCase(pivot) > 0) 
+            {
+                r--;
+            }
+            if (l <= r) 
+            {
+                swap(arr, l, r);
+                l++;
+                r--;
+            }
+        }
+        
+        if (left < r) 
+        {
+            quick_sort(arr, left, r);
+        }
+        if (l < right) 
+        {
+            quick_sort(arr, l, right);
+        }
+        return arr;
+    }
+    
+    void swap(String[] a, int left, int right)
+    {
+        String temp = a[left];
+        a[left] = a[right];
+        a[right] = temp;
+    }
+    
+    public void merge_sort()
+    {
+        System.out.println("Enter Size of array : ");
+        int n = input.nextInt();
+        
+        System.out.println("Enter Elements : ");
+        for (int i = 0; i < n; i++)
+        {
+            arr[i] = input.next();
+        }
+        
+        String[] back = merge_sort(arr, 0, n-1);
+        
+        System.out.println("\nAfter applying Merge Sort Array elements.....");
+        for(int i = 0; i < n; i++)
+        {
+            System.out.println(back[i]);
+        }
+    }
+    
+    public String[] merge_sort(String[] arr, int left, int right)
+    {
+        if (left == right) 
+        {
+            return arr;
+        }
+        
+        int mid = (left + right) / 2;
+        merge_sort(arr, left, mid);
+        merge_sort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
+        return arr;
+    }
+    
+    public void merge(String[] arr, int left,int mid, int right)
+    {
+        int n = right - left + 1;
+        String[] b = new String[n];
+        int l = left;
+        int m = mid + 1;
+        int i = 0;
+        while (l <= mid && m <= right)
+        {
+            if (arr[l].compareTo(arr[m]) < 0)
+            {
+                b[i] = arr[l];
+                l++;
+            }
+            else
+            {
+                b[i] = arr[m];
+                m++;
+            }
+            i++;
+        }
+        
+        while (l <= mid)
+        {
+            b[i] = arr[l];
+            l++;
+            i++;
+        }
+        
+        while (m <= right)
+        {
+            b[i] = arr[m];
+            m++;
+            i++;
+        }
+        
+        for (i = 0; i < n; i++)
+        {
+            arr[left + i] = b[i];
+        }
+    }
+    
+    public static void main(String[] args)
+    {
+        Scanner input = new Scanner(System.in);
+        Que5 sort = new Que5();
+        while(true)
+        {
+            System.out.println("1. Insertion Sort");
+            System.out.println("2. Selection Sort");
+            System.out.println("3. Bubble Sort");
+            System.out.println("4. Quick Sort");
+            System.out.println("5. Merge Sort");
+            System.out.println("0. Exit");
+            System.out.println("Enter your choice : ");
+            
+            String s = input.next();
+            char choice = s.charAt(0);
+                 
+            switch (choice)
+            {
+                case '1' :
+                {
+                    sort.insertion_sort();
+                    break;
+                }
+                case '2' :
+                {
+                    sort.selection_sort();
+                    break;
+                }
+                case '3' :
+                {
+                    sort.bubble_sort();
+                    break;
+                }
+                case '4' :
+                {
+                    sort.quick_sort();
+                    break;
+                }
+                case '5' :
+                 {
+                    sort.merge_sort();
+                    break;
+                }
+                case '0' :
+                {
+                    return;
+                }
+                default:
+                {
+                    System.out.println("Enter Correct Choice");
+                    break;
+                }
+            }
+        }
+    }
+}

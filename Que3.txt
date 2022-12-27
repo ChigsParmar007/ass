@@ -1,0 +1,150 @@
+package java_ds;
+import java.util.Scanner;
+
+public class Que3 
+{
+    Node root;
+    Scanner input = new Scanner(System.in);
+
+    static class Node
+    {
+        Node left;
+        Node right;
+        int data;
+
+        public Node(int data)
+        {
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+    void insert()
+    {
+        System.out.println("Enter new node value : ");
+        int data = input.nextInt();
+        insert(data);
+    }
+
+    private void insert(int data)
+    {
+        Node newNode = new Node(data);
+
+        if (root == null)
+        {
+            root = newNode;
+        }
+        else
+        {
+            Node current = root, parent;
+            while (true)
+            {
+                parent = current;
+                if (data < current.data)
+                {
+                    current = current.left;
+                    if (current == null)
+                    {
+                        parent.left = newNode;
+                        return;
+                    }
+                }
+                else
+                {
+                    current = current.right;
+                    if (current == null)
+                    {
+                        parent.right = newNode;
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    public void ascending()
+    {
+        ascending(root);
+    }
+
+    private void ascending(Node root)
+    {
+
+        if (root == null)
+        {
+            System.out.println("Tree is empty");
+        }
+        else
+        {
+            if (root.left != null)
+                ascending(root.left);
+            System.out.println(root.data + " ");
+            if (root.right != null)
+                ascending(root.right);
+        }
+    }
+
+
+    public void descending()
+    {
+        descending(root);
+    }
+
+    private void descending(Node node)
+    {
+        if (node != null)
+        {
+            descending(node.right);
+            System.out.println(node.data + " ");
+            descending(node.left);
+        }
+    }
+
+    public static void main (String[]args)
+    {
+        Que3 tree = new Que3();
+        Scanner input = new Scanner(System.in);
+        int choice;
+
+        while (true)
+        {
+            System.out.println("01. Insert");
+            System.out.println("02. Inorder Traversal(Ascending)");
+            System.out.println("03. Converse Inorder Traversal(Descending Order)");
+            System.out.println("0. Exit");
+            System.out.println("Enter your choice : ");
+
+            String s = input.next();
+            choice = s.charAt(0);
+
+            switch (choice)
+            {
+                case '1' :
+                {
+                    tree.insert();
+                    break;
+                }
+                case '2' :
+                {
+                    tree.ascending();
+                    break;
+                }
+                case '3' :
+                {
+                    tree.descending();
+                    break;
+                }
+                case '0' :
+                {
+                    System.exit(0);
+                }
+                default:
+                {
+                    System.out.println("Enter Correct Choice");
+                    break;
+                }
+            }
+        }
+    }
+}

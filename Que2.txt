@@ -1,0 +1,267 @@
+package java_ds;
+import java.util.Scanner;
+
+public class Que2 
+{
+    static Node root = null;
+    Scanner input = new Scanner(System.in);
+    static class Node
+    {
+        int data;
+        Node left;
+        Node right;
+
+        public Node(int data)
+        {
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+    public void insert()
+    {
+        System.out.println("Enter new node value : ");
+        int data = input.nextInt();
+        root = insert(root,data);
+    }
+
+    private Node insert(Node root, int data)
+    {
+        Node new_node = new Node(data);
+
+        if (root == null)
+            root = new_node;
+        else
+        {
+            if (new_node.data <= root.data)
+                root.left = insert(root.left, data);
+            else
+                root.right = insert(root.right, data);
+        }
+        return root;
+    }
+
+    public void replace()
+    {
+        System.out.println("Enter element to delete : ");
+        int search = input.nextInt();
+        if (root == null)
+            System.out.println("Tree Empty");
+        else if (!search(search))
+            System.out.println("Sorry "+ search +" is not present");
+        else
+        {
+            System.out.println("Enter new value you want to replace with : " + search);
+            int replace = input.nextInt();
+            root = delete(root, search);
+            root = insert(root,replace);
+        }
+    }
+
+    /* Functions to delete data*/
+    public void delete()
+    {
+        System.out.println("Enter element to delete : ");
+        int search = input.nextInt();
+        if (root == null)
+            System.out.println("Tree Empty");
+        else if (!search(search))
+            System.out.println("Sorry "+ search +" is not present");
+        else
+        {
+            root = delete(root, search);
+            System.out.println(search + " deleted from the tree");
+        }
+    }
+
+    private Node delete(Node root, int search)
+    {
+        Node p, p2, n;
+        if (search == root.data)
+        {
+            Node lt, rt;
+            lt = root.left;
+            rt = root.right;
+            if (lt == null && rt == null)
+                return null;
+            else if (lt == null)
+            {
+                p = rt;
+                return p;
+            }
+            else if (rt == null)
+            {
+                p = lt;
+                return p;
+            }
+            else
+            {
+                p2 = rt;
+                p = rt;
+                while (p.left != null)
+                    p = p.left;
+                p.left = lt;
+                return p2;
+            }
+        }
+        if (search < root.data)
+        {
+            n = delete(root.left, search);
+            root.left = n;
+        }
+        else
+        {
+            n = delete(root.right, search);
+            root.right = n;
+        }
+        return root;
+    }
+
+    /*Functions to search for an element*/
+    public boolean search(int search)
+    {
+        return search(root, search);
+    }
+
+    /* Function to search for an element recursively*/
+    private boolean search(Node r, int search)
+    {
+        boolean found = false;
+        int rval;
+        while ((r != null) && !found)
+        {
+            rval = r.data;
+            if (search < rval)
+                r = r.left;
+            else if (search > rval)
+                r = r.right;
+            else
+            {
+                found = true;
+                break;
+            }
+            found = search(r, search);
+        }
+        return found;
+    }
+
+    /* Function for inorder traversal */
+    public void inorder()
+    {
+        inorder(root);
+    }
+
+    private void inorder(Node r)
+    {
+        if (root == null)
+        {
+            System.out.println("Tree is empty");
+        }
+        else
+        {
+            if (r.left != null)
+                inorder(r.left);
+            System.out.print(r.data + " ");
+            if (r.right != null)
+                inorder(r.right);
+        }
+    }
+
+    /* Function for preorder traversal */
+    public void preorder()
+    {
+        preorder(root);
+    }
+
+    private void preorder(Node r)
+    {
+        if (r != null)
+        {
+            System.out.print(r.data + " ");
+            preorder(r.left);
+            preorder(r.right);
+        }
+    }
+
+    /* Function for postorder traversal */
+    public void postorder()
+    {
+        postorder(root);
+    }
+
+    private void postorder(Node r)
+    {
+        if (r != null)
+        {
+            postorder(r.left);
+            postorder(r.right);
+            System.out.print(r.data + " ");
+        }
+    }
+
+
+    public static void main(String[] args)
+    {
+        Scanner input = new Scanner(System.in);
+        Que2 bst = new Que2();
+        int choice;
+
+        while(true)
+        {
+            System.out.println("\n1. Insert ");
+            System.out.println("2. Inorder");
+            System.out.println("3. Preorder");
+            System.out.println("4. Postorder");
+            System.out.println("5. Delete");
+            System.out.println("6. Search And Replace");
+            System.out.println("0. Exit");
+
+            String s = input.next();
+            choice = s.charAt(0);
+            
+            switch (choice)
+            {
+                case '1' :
+                {
+                    bst.insert();
+                    break;
+                }
+                case '2' :
+                {
+                    bst.inorder();
+                    break;
+                }
+                case '3' :
+                {
+                     bst.preorder();
+                    break;
+                }
+                case '4' :
+                {
+                    bst.postorder();
+                    break;
+                }
+                case '5' :
+                {
+                    bst.delete();
+                    break;
+                }
+                case '6' :
+                {
+                    bst.replace();
+                    break;
+                }
+                case '0' :
+                {
+                    System.exit(0);
+                }
+                default:
+                {
+                    System.out.println("Enter Correct Choice");
+                    break;
+                }
+            }
+        }
+    }
+}
